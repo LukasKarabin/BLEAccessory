@@ -1,4 +1,4 @@
-package fh_kiel.bleaccessorry.app;
+package fh_kiel.bleaccessory.Beacon;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import fh_kiel.bleaccessorry.app.R;
 
 /**
  * Created by Lukas on 09.05.2014.
@@ -21,7 +23,7 @@ public class BeaconAdapter extends ArrayAdapter<RoomBeacon> {
     {
         if(convertView == null)
         {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.beacon_item_list, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.beacon_item, parent, false);
         }
         RoomBeacon beacon = getItem(index);
 

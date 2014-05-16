@@ -1,6 +1,4 @@
-package fh_kiel.bleaccessorry.app;
-
-import java.util.List;
+package fh_kiel.bleaccessory.Beacon;
 
 /**
  * Created by Lukas on 09.05.2014.

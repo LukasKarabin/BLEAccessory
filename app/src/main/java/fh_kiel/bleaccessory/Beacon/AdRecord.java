@@ -1,4 +1,4 @@
-package fh_kiel.bleaccessorry.app;
+package fh_kiel.bleaccessory.Beacon;
 
 /**
  * Created by Lukas on 09.05.2014.

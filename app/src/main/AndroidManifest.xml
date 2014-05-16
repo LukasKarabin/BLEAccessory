@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="fh_kiel.bleaccessorry.app.BeaconActivity"
+            android:name="fh_kiel.bleaccessory.app.ScanActivity"
             android:label="Beacon Monitor" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fh_kiel.bleaccessorry.app.Page2"
+            android:name="fh_kiel.bleaccessory.app.RoomplanActivity"
             android:label="@string/title_activity_page2" >
         </activity>
     </application>

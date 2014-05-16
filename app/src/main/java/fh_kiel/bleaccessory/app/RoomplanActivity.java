@@ -1,19 +1,20 @@
-package fh_kiel.bleaccessorry.app;
+package fh_kiel.bleaccessory.app;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import fh_kiel.bleaccessorry.app.R;
 
-public class Page2 extends Activity {
+
+public class RoomplanActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page2);
+        setContentView(R.layout.roomplan_activity);
 
         String str2= this.getIntent().getExtras().getString("EXTRA_BEACON");
         Toast.makeText(getApplicationContext(), str2, Toast.LENGTH_SHORT).show();

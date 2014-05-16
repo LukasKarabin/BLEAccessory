@@ -1,4 +1,4 @@
-package fh_kiel.bleaccessorry.app;
+package fh_kiel.bleaccessory.Beacon;
 
 import android.content.Context;
 import android.graphics.Canvas;

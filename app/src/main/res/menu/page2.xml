@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="fh_kiel.bleaccessorry.app.Page2" >
+    tools:context="fh_kiel.bleaccessory.app.RoomplanActivity" >
     
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
