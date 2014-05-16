@@ -25,7 +25,7 @@
         </activity>
         <activity
             android:name="fh_kiel.bleaccessory.app.RoomplanActivity"
-            android:label="@string/title_activity_page2" >
+            android:label="@string/roomplan_activity_titel" >
         </activity>
     </application>
 

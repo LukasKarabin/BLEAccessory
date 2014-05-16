@@ -23,7 +23,7 @@ public class BeaconAdapter extends ArrayAdapter<RoomBeacon> {
     {
         if(convertView == null)
         {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.beacon_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.scan_activity, parent, false);
         }
         RoomBeacon beacon = getItem(index);
 

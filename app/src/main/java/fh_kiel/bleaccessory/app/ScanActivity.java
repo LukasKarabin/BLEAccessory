@@ -4,19 +4,24 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.view.Menu;
 
 import java.util.HashMap;
+import java.util.zip.Inflater;
 
 import fh_kiel.bleaccessorry.app.R;
 import fh_kiel.bleaccessory.Beacon.BeaconAdapter;
@@ -29,12 +34,19 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
     /* Collect unique devices discovered, keyed by address */
     private HashMap<String, RoomBeacon> mBeacons;
     private BeaconAdapter mAdapter;
+    private Menu menuRef;
+
+    private void fillDummy()
+    {
+        RoomBeacon beacon = new RoomBeacon("Dummy", "11:11:11:11:11:11", -33);
+        mHandler.sendMessage(Message.obtain(null, 0, beacon));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        //setProgressBarIndeterminate(true);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setProgressBarIndeterminate(true);
 
         /*
          * We are going to display all the device beacons that we discover
@@ -44,6 +56,8 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
         mAdapter = new BeaconAdapter(this);
         list.setAdapter(mAdapter);
         setContentView(list);
+
+        fillDummy();
 
         list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -59,6 +73,7 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
+
         });
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,8 +101,10 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        this.menuRef = menu;
         return true;
     }
 
@@ -145,17 +162,18 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
 
     private void startScan() {
         //Scan for devices advertising the thermometer service
+        if(menuRef != null)
+            menuRef.findItem(R.id.action_scan).setTitle("Stop");
         mBluetoothAdapter.startLeScan(this);
-        //setProgressBarIndeterminateVisibility(true);
-
+        setProgressBarIndeterminateVisibility(true);
         mHandler.postDelayed(mStopRunnable, 5000);
     }
 
     private void stopScan() {
+        if(menuRef != null)
+            menuRef.findItem(R.id.action_scan).setTitle("Scan");
         mBluetoothAdapter.stopLeScan(this);
-        //setProgressBarIndeterminateVisibility(false);
-
-        mHandler.postDelayed(mStartRunnable, 2500);
+        setProgressBarIndeterminateVisibility(false);
     }
 
     /* BluetoothAdapter.LeScanCallback */
@@ -202,5 +220,25 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
             mAdapter.notifyDataSetChanged();
         }
     };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.action_scan:
+                if (item.getTitle().equals("Scan"))
+                {
+                    startScan();
+                }
+                else
+                {
+                    stopScan();
+                }
+                return(true);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
 

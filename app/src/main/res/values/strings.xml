@@ -5,7 +5,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_scan">Scan</string>
-    <string name="HAW">Hello Android World!</string>
-    <string name="title_activity_page2">Page2</string>
+    <string name="roomplan_activity_titel">Rooomplan</string>
 
 </resources>
