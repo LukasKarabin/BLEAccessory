@@ -4,28 +4,22 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
-import android.content.ClipData;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.view.Menu;
-
-import java.util.HashMap;
-import java.util.zip.Inflater;
-
-import fh_kiel.bleaccessory.app.R;
 import fh_kiel.bleaccessory.Beacon.BeaconAdapter;
 import fh_kiel.bleaccessory.Beacon.RoomBeacon;
+
+import java.util.HashMap;
 
 public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCallback {
     private static final String TAG = "ScanActivity";
@@ -83,7 +77,7 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
                  str2=  ((RoomBeacon)adapterView.getItemAtPosition(i)).getName() + " " + ((RoomBeacon)adapterView.getItemAtPosition(i)).getAddress();
                 Toast.makeText(getApplicationContext(),str2,Toast.LENGTH_SHORT).show();
 
-                Intent intenttest = new Intent(ScanActivity.this, RoomplanActivity.class);
+                Intent intenttest = new Intent(ScanActivity.this, RoomPlanActivity.class);
                 intenttest.putExtra("EXTRA_BEACON", ((RoomBeacon)adapterView.getItemAtPosition(i)).getAddress());
                 startActivity(intenttest);
             }

@@ -47,7 +47,7 @@ public class RoomPlanActivity extends Activity {
             // Making a request to url and getting response
 
 
-            String jsonStr = sh.makeServiceCall("http://149.222.134.187:3000/schedule/" + roomId, ServiceHandler.GET);
+            String jsonStr = sh.makeServiceCall("https://www.dropbox.com/meta_dl/eyJzdWJfcGF0aCI6ICIiLCAidGVzdF9saW5rIjogZmFsc2UsICJzZXJ2ZXIiOiAiZGwuZHJvcGJveHVzZXJjb250ZW50LmNvbSIsICJpdGVtX2lkIjogbnVsbCwgImlzX2RpciI6IGZhbHNlLCAidGtleSI6ICJsdzJyYnJ1MjNiYzdzYTMifQ/AAMkjk7KhQNhHeXeBTMIHYvhNaop8HcZp15pSodjJhPBmA?dl=1" , ServiceHandler.GET);
 
             Log.d("Response: ", "> " + jsonStr);
 
