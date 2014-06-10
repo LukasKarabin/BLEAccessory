@@ -4,6 +4,10 @@
     //BT Permissions?
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    //Internet Permissions
+    <uses-permission android:name="android.permission.INTERNET" />
+    
     //BLE Feature
     <uses-feature
         android:name="android.hardware.bluetooth_le"
@@ -24,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fh_kiel.bleaccessory.app.RoomplanActivity"
+            android:name="fh_kiel.bleaccessory.app.RoomPlanActivity"
             android:label="@string/roomplan_activity_titel" >
         </activity>
     </application>
