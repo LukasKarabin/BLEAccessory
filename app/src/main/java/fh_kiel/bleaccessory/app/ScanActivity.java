@@ -23,7 +23,7 @@ import android.view.Menu;
 import java.util.HashMap;
 import java.util.zip.Inflater;
 
-import fh_kiel.bleaccessorry.app.R;
+import fh_kiel.bleaccessory.app.R;
 import fh_kiel.bleaccessory.Beacon.BeaconAdapter;
 import fh_kiel.bleaccessory.Beacon.RoomBeacon;
 
@@ -103,7 +103,7 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.scan_menu, menu);
         this.menuRef = menu;
         return true;
     }
@@ -115,24 +115,26 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
          * We need to enforce that Bluetooth is first enabled, and take the
          * user to settings to enable it if they have not done so.
          */
-        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
+        //TODO Das muss wieder rein
+       /* if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
             //Bluetooth is disabled
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivity(enableBtIntent);
             finish();
             return;
-        }
+        }*/
 
         /*
          * Check for Bluetooth LE Support.  In production, our manifest entry will keep this
          * from installing on these devices, but this will allow test devices or other
          * sideloads to report whether or not the feature exists.
          */
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+        //TODO Das muss wieder rein
+        /*if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, "No LE Support.", Toast.LENGTH_SHORT).show();
             finish();
             return;
-        }
+        }*/
 
         //Begin scanning for LE devices
         startScan();

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import fh_kiel.bleaccessorry.app.R;
+import fh_kiel.bleaccessory.app.R;
 
 /**
  * Created by Lukas on 09.05.2014.

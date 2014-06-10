@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import fh_kiel.bleaccessorry.app.R;
+import fh_kiel.bleaccessory.app.R;
 
 
 public class RoomplanActivity extends Activity {
@@ -25,7 +25,7 @@ public class RoomplanActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.page2, menu);
+        getMenuInflater().inflate(R.menu.roomplan_menu, menu);
         return true;
     }
 
