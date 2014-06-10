@@ -4,6 +4,10 @@
     //BT Permissions?
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    //Internet Permissions
+    <uses-permission android:name="android.permission.INTERNET" />
+    
     //BLE Feature
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-feature
