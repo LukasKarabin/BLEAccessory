@@ -1,7 +1,6 @@
 package fh_kiel.bleaccessory.app;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -9,30 +8,22 @@ import java.util.Date;
  */
 public class ScheduleEntry {
     private int roomID;
-    private int startTime;
-    private int endTime;
+    private Date start;
+    private Date end;
+    private int day;
+    private Date date;
     private String title;
 
-    ScheduleEntry(int roomID, int startTime, int endTime, String title) {
+    ScheduleEntry(int roomID, Date start, Date end, Date date, int day, String title) {
 
         this.roomID = roomID;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.start = start;
+        this.end = end;
+        this.date = date;
+        this.day = day;
         this.title = title;
     }
 
-
-    public void setRoomID(int roomID) {
-        this.roomID = roomID;
-    }
-
-    public void setEndTime(int endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setStartTime(int startTime) {
-        this.startTime = startTime;
-    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -42,27 +33,18 @@ public class ScheduleEntry {
         return title;
     }
 
-    public int getEndTime() {
-        return endTime;
-    }
-
-    public int getStartTime() {
-        return startTime;
-    }
 
     public int getRoomID() {
         return roomID;
     }
 
     public int getDay(){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date((long)startTime*1000));
-        int day = cal.get(Calendar.DAY_OF_WEEK);
+
         return day;
     }
 
-    public int getDuration(){
-        int duration = (endTime - startTime)/60;
+    public long getDuration(){
+        long duration = ((end.getTime() - start.getTime())/60000);
         return duration;
     }
 
@@ -70,7 +52,6 @@ public class ScheduleEntry {
         SimpleDateFormat hourFormat = new SimpleDateFormat("HH");
         SimpleDateFormat minFormat = new SimpleDateFormat("mm");
 
-        Date start = new Date((long)startTime*1000);
         int hour = Integer.parseInt(hourFormat.format(start));
         int min = Integer.parseInt(minFormat.format(start));
 
@@ -80,4 +61,27 @@ public class ScheduleEntry {
 
     }
 
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

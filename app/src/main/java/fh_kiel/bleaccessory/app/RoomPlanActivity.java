@@ -1,23 +1,19 @@
 package fh_kiel.bleaccessory.app;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -80,10 +76,13 @@ public class RoomPlanActivity extends Activity {
                     for (int i = 0; i < jsonEntries.length(); i++) {
 
                         String title = jsonEntries.getJSONObject(i).getString("title");
-                        int start = jsonEntries.getJSONObject(i).getInt("start_timestamp");
-                        int end = jsonEntries.getJSONObject(i).getInt("end_timestamp");
+                        Date start = new Date(jsonEntries.getJSONObject(i).getString("start"));
+                        Date end = new Date(jsonEntries.getJSONObject(i).getString("end"));
 
-                        ScheduleEntry entry = new ScheduleEntry(roomId, start, end, title);
+                        int day = jsonEntries.getJSONObject(i).getInt("day");
+                        Date date = new Date(jsonEntries.getJSONObject(i).getInt("date"));
+
+                        ScheduleEntry entry = new ScheduleEntry(roomId, start, end, date, day, title);
 
 
                         entries.add(entry);
@@ -137,7 +136,7 @@ public class RoomPlanActivity extends Activity {
 
                 TextView entryView = new TextView(getApplicationContext());
                 TableRow.LayoutParams params = new TableRow.LayoutParams();
-                Integer span = entry.getDuration()/15;
+                int span = (int)entry.getDuration()/15;
                 params.span = span;
                 params.column = entry.getColumn();
                 entryView.setBackgroundColor(0xff669900);
