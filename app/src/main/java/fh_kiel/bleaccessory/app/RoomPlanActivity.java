@@ -75,7 +75,7 @@ public class RoomPlanActivity extends Activity {
                     int day = 1;
                     for (int i = 0; i < jsonEntries.length(); i++) {
 
-                        titleStr = "TEST";//jsonEntries.getJSONObject(i).getString("title");
+                        titleStr = jsonEntries.getJSONObject(i).getString("title");
                         timeStrStart = jsonEntries.getJSONObject(i).getString("start");
                         timeStrEnd = jsonEntries.getJSONObject(i).getString("end");
                         try {
