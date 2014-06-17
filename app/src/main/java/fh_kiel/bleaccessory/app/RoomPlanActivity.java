@@ -2,6 +2,7 @@ package fh_kiel.bleaccessory.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,23 +35,11 @@ public class RoomPlanActivity extends Activity {
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        intent = intent = getIntent();
+        intent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.roomplan_activity);
 
-        String id = intent.getStringExtra("EXTRA_BEACON");
-        Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
-
         new GetRoomData().execute();
-
-        for(int i = 0; i < (7*13); i++){
-            TableRow row = new TableRow(getApplicationContext());
-
-            TextView entryView = new TextView(getApplicationContext());
-            entryView.setBackgroundColor(0xff669900);
-
-            row.addView(entryView);
-        }
     }
 
     /**
@@ -62,8 +55,7 @@ public class RoomPlanActivity extends Activity {
             // Making a request to url and getting response
 
 
-            String jsonStr = sh.makeServiceCall("http://149.222.134.187:3000/111111111111/schedule" , ServiceHandler.GET);
-
+            String jsonStr = sh.makeServiceCall("http://149.222.134.13:3000/"+intent.getStringExtra("EXTRA_BEACON")+"/schedule" , ServiceHandler.GET);
             Log.d("Response: ", "> " + jsonStr);
 
             if (jsonStr != null) {
@@ -72,21 +64,35 @@ public class RoomPlanActivity extends Activity {
                     // Getting JSON Array node
                     JSONObject jsonEntry = new JSONObject(jsonStr);
 
-                    JSONArray jsonEntries = jsonEntry.getJSONArray("entries");
+                    JSONArray jsonEntries = jsonEntry.getJSONArray("schedules");
+
+                    DateFormat df = new SimpleDateFormat("HH:mm:ss");
+                    Date start = new Date();
+                    Date end = new Date();
+                    String titleStr;
+                    String timeStrStart;
+                    String timeStrEnd;
+                    int day = 1;
                     for (int i = 0; i < jsonEntries.length(); i++) {
 
-                        String title = jsonEntries.getJSONObject(i).getString("title");
-                        Date start = new Date(jsonEntries.getJSONObject(i).getString("start"));
-                        Date end = new Date(jsonEntries.getJSONObject(i).getString("end"));
+                        titleStr = "TEST";//jsonEntries.getJSONObject(i).getString("title");
+                        timeStrStart = jsonEntries.getJSONObject(i).getString("start");
+                        timeStrEnd = jsonEntries.getJSONObject(i).getString("end");
+                        try {
+                            //day = 1;
+                            start = df.parse(timeStrStart);
+                            end = df.parse(timeStrEnd);
+                            day = jsonEntries.getJSONObject(i).getInt("day");
 
-                        int day = jsonEntries.getJSONObject(i).getInt("day");
-                        Date date = new Date(jsonEntries.getJSONObject(i).getInt("date"));
 
-                        ScheduleEntry entry = new ScheduleEntry(roomId, start, end, date, day, title);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
 
+                        //Date date = new Date(jsonEntries.getJSONObject(i).getInt("date"));
 
+                        ScheduleEntry entry = new ScheduleEntry(roomId, start, end, new Date(), day, titleStr);
                         entries.add(entry);
-
                     }
 
                 } catch (JSONException e) {
@@ -115,23 +121,27 @@ public class RoomPlanActivity extends Activity {
 
                 switch(entry.getDay()){
 
-                    case 2:
+                    case 1:
                         row = (TableRow) findViewById(R.id.rowmon);
                         break;
-                    case 3:
+                    case 2:
                         row = (TableRow) findViewById(R.id.rowtu);
                         break;
-                    case 4:
+                    case 3:
                         row = (TableRow) findViewById(R.id.rowwe);
                         break;
-                    case 5:
+                    case 4:
                         row = (TableRow) findViewById(R.id.rowthu);
                         break;
-
-                    case 6:
+                    case 5:
                         row = (TableRow) findViewById(R.id.rowfri);
                         break;
-
+                    case 6:
+                        row = (TableRow) findViewById(R.id.rowsat);
+                        break;
+                    case 7:
+                        row = (TableRow) findViewById(R.id.rowsun);
+                        break;
                 }
 
                 TextView entryView = new TextView(getApplicationContext());

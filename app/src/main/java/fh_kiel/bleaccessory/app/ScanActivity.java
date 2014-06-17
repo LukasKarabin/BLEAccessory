@@ -54,28 +54,22 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
         fillDummy();
 
         list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
                 // TODO Auto-generated method stub
-                String str= "Selected test";
-                Toast.makeText(getApplicationContext(),str,Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
-
         });
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String str2= "Click : "+i;
-                 str2=  ((RoomBeacon)adapterView.getItemAtPosition(i)).getName() + " " + ((RoomBeacon)adapterView.getItemAtPosition(i)).getAddress();
-                Toast.makeText(getApplicationContext(),str2,Toast.LENGTH_SHORT).show();
+                //String str2 =  ((RoomBeacon)adapterView.getItemAtPosition(i)).getName() + " " + ((RoomBeacon)adapterView.getItemAtPosition(i)).getAddress();
+                //Toast.makeText(getApplicationContext(),str2,Toast.LENGTH_SHORT).show();
 
                 Intent intenttest = new Intent(ScanActivity.this, RoomPlanActivity.class);
                 intenttest.putExtra("EXTRA_BEACON", ((RoomBeacon)adapterView.getItemAtPosition(i)).getAddress().replace(":",""));
