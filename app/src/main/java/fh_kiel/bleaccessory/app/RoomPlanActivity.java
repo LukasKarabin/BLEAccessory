@@ -2,6 +2,7 @@ package fh_kiel.bleaccessory.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,16 +27,21 @@ public class RoomPlanActivity extends Activity {
     int roomId = 123;
     List<ScheduleEntry> entries = new ArrayList<ScheduleEntry>();
 
+    Intent intent;// = getIntent();
+
     /**
      * Called when the activity is first created.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
+        intent = intent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.roomplan_activity);
 
-        //new GetRoomData().execute();
+        String id = intent.getStringExtra("EXTRA_BEACON");
+        Toast.makeText(getApplicationContext(),id,Toast.LENGTH_SHORT).show();
+
+        new GetRoomData().execute();
 
         for(int i = 0; i < (7*13); i++){
             TableRow row = new TableRow(getApplicationContext());
@@ -58,7 +66,7 @@ public class RoomPlanActivity extends Activity {
             // Making a request to url and getting response
 
 
-            String jsonStr = sh.makeServiceCall("https://www.dropbox.com/meta_dl/eyJzdWJfcGF0aCI6ICIiLCAidGVzdF9saW5rIjogZmFsc2UsICJzZXJ2ZXIiOiAiZGwuZHJvcGJveHVzZXJjb250ZW50LmNvbSIsICJpdGVtX2lkIjogbnVsbCwgImlzX2RpciI6IGZhbHNlLCAidGtleSI6ICJsdzJyYnJ1MjNiYzdzYTMifQ/AAMkjk7KhQNhHeXeBTMIHYvhNaop8HcZp15pSodjJhPBmA?dl=1" , ServiceHandler.GET);
+            String jsonStr = sh.makeServiceCall("http://149.222.134.187:3000/111111111111/schedule" , ServiceHandler.GET);
 
             Log.d("Response: ", "> " + jsonStr);
 

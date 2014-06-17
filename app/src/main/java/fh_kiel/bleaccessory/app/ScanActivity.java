@@ -78,7 +78,7 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
                 Toast.makeText(getApplicationContext(),str2,Toast.LENGTH_SHORT).show();
 
                 Intent intenttest = new Intent(ScanActivity.this, RoomPlanActivity.class);
-                intenttest.putExtra("EXTRA_BEACON", ((RoomBeacon)adapterView.getItemAtPosition(i)).getAddress());
+                intenttest.putExtra("EXTRA_BEACON", ((RoomBeacon)adapterView.getItemAtPosition(i)).getAddress().replace(":",""));
                 startActivity(intenttest);
             }
         });
