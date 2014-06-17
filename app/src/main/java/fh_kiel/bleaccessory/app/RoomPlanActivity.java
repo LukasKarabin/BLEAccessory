@@ -1,9 +1,13 @@
 package fh_kiel.bleaccessory.app;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Canvas;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.widget.TableRow;
 import android.widget.TextView;
 import org.json.JSONArray;
@@ -28,16 +32,23 @@ public class RoomPlanActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.roomplan_activity);
-        new GetRoomData().execute();
 
+        //new GetRoomData().execute();
+
+        for(int i = 0; i < (7*13); i++){
+            TableRow row = new TableRow(getApplicationContext());
+
+            TextView entryView = new TextView(getApplicationContext());
+            entryView.setBackgroundColor(0xff669900);
+
+            row.addView(entryView);
+        }
     }
-
 
     /**
      * Async task class to get json by making HTTP call
      */
     private class GetRoomData extends AsyncTask<Void, Void, Void> {
-
 
         @Override
         protected Void doInBackground(Void... arg0) {
@@ -126,9 +137,7 @@ public class RoomPlanActivity extends Activity {
                 entryView.setText(entry.getTitle());
                 row.addView(entryView);
             }
-
         }
-
     }
 }
 

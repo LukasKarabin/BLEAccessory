@@ -25,7 +25,13 @@ public class RoomBeacon {
     public String getAddress() {
         return mAddress;
     }
+
+    @Override
+    public String toString() {
+        return "Beacon [Address=" + mAddress + ", Name=" + mName + "]";
+    }
 }
+
 
 
 
