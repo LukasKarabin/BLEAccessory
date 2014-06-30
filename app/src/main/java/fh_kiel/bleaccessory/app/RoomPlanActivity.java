@@ -1,33 +1,34 @@
 package fh_kiel.bleaccessory.app;
 
+//Imports
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import fh_kiel.bleaccessory.Data.ServiceHandler;
 
-
+// Class RoomPlanActivity
+//
+// Description:
+// Responsible for the RoomPlan View and Communication with WebService
 public class RoomPlanActivity extends Activity {
 
+    //Variables
     int roomId = 123;
     List<ScheduleEntry> entries = new ArrayList<ScheduleEntry>();
-
     Intent intent;// = getIntent();
 
     /**
@@ -38,7 +39,6 @@ public class RoomPlanActivity extends Activity {
         intent = getIntent();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.roomplan_activity);
-
         new GetRoomData().execute();
     }
 
@@ -47,23 +47,24 @@ public class RoomPlanActivity extends Activity {
      */
     private class GetRoomData extends AsyncTask<Void, Void, Void> {
 
+
+        // AsyncTask enables proper and easy use of the UI thread. This class allows to perform
+        // background operations and publish results on the UI thread without having to manipulate
+        // threads and/or handlers.
         @Override
         protected Void doInBackground(Void... arg0) {
             // Creating service handler class instance
             ServiceHandler sh = new ServiceHandler();
 
             // Making a request to url and getting response
-
-
-            String jsonStr = sh.makeServiceCall("http://149.222.134.13:3000/"+intent.getStringExtra("EXTRA_BEACON")+"/schedule" , ServiceHandler.GET);
+            String jsonStr = sh.makeServiceCall("http://149.222.130.9:3000/"+intent.getStringExtra("EXTRA_BEACON")+"/schedule" , ServiceHandler.GET);
             Log.d("Response: ", "> " + jsonStr);
 
+            //Parse JSON String
             if (jsonStr != null) {
                 try {
-
                     // Getting JSON Array node
                     JSONObject jsonEntry = new JSONObject(jsonStr);
-
                     JSONArray jsonEntries = jsonEntry.getJSONArray("schedules");
 
                     DateFormat df = new SimpleDateFormat("HH:mm:ss");
@@ -74,7 +75,6 @@ public class RoomPlanActivity extends Activity {
                     String timeStrEnd;
                     int day = 1;
                     for (int i = 0; i < jsonEntries.length(); i++) {
-
                         titleStr = jsonEntries.getJSONObject(i).getString("title");
                         timeStrStart = jsonEntries.getJSONObject(i).getString("start");
                         timeStrEnd = jsonEntries.getJSONObject(i).getString("end");
@@ -83,12 +83,9 @@ public class RoomPlanActivity extends Activity {
                             start = df.parse(timeStrStart);
                             end = df.parse(timeStrEnd);
                             day = jsonEntries.getJSONObject(i).getInt("day");
-
-
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-
                         //Date date = new Date(jsonEntries.getJSONObject(i).getInt("date"));
 
                         ScheduleEntry entry = new ScheduleEntry(roomId, start, end, new Date(), day, titleStr);
@@ -102,25 +99,22 @@ public class RoomPlanActivity extends Activity {
             } else {
                 Log.e("ServiceHandler", "Couldn't get any data from the url");
             }
-
             return null;
         }
 
+        // Runs on the UI thread after doInBackground
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+
             /**
              * Updating parsed JSON data into ListView
              * */
-
-
             for(int i = 0; i < entries.size(); i++){
                 TableRow row = new TableRow(getApplicationContext());
-
                 ScheduleEntry entry = entries.get(i);
 
                 switch(entry.getDay()){
-
                     case 1:
                         row = (TableRow) findViewById(R.id.rowmon);
                         break;

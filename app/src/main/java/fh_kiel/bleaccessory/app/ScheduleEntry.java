@@ -1,19 +1,22 @@
 package fh_kiel.bleaccessory.app;
 
+// Imports
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by casi on 10.06.14.
- */
+// Class ScheduleEntry
+//
+// Description:
+// Class to create Schedule Entry Objects
 public class ScheduleEntry {
-    private int roomID;
-    private Date start;
-    private Date end;
-    private int day;
-    private Date date;
-    private String title;
+    private int roomID;     // Romm ID
+    private Date start;     // Start time of Reservation; Only HH:mm:ss is used. Date is always 01.01.1970
+    private Date end;       // End time of Reservation; Only HH:mm:ss is used. Date is always 01.01.1970
+    private int day;        // Reserved Weekday (0 = Sunday; only used for repeating reservations with no specific date)
+    private Date date;      // Reserved Date (only used for reservation with unique date)
+    private String title;   // Event Title
 
+    // Constructor
     ScheduleEntry(int roomID, Date start, Date end, Date date, int day, String title) {
 
         this.roomID = roomID;
@@ -24,6 +27,7 @@ public class ScheduleEntry {
         this.title = title;
     }
 
+    // GETTER & SETTER
 
     public void setTitle(String title) {
         this.title = title;
@@ -58,7 +62,6 @@ public class ScheduleEntry {
         double column = (hour-8)*4 + (min/15) + 1;
 
         return ((int)Math.round(column));
-
     }
 
     public Date getStart() {

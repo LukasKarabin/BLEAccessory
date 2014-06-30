@@ -2,19 +2,18 @@ package fh_kiel.bleaccessory.Data;
 
 /**
  * Created by Lukas on 12.06.2014.
+ * NOT USED -> NOT COMPLETED !!!!
  */
 
-        import java.util.LinkedList;
-        import java.util.List;
-
-        import android.content.ContentValues;
-        import android.content.Context;
-        import android.database.Cursor;
-        import android.database.sqlite.SQLiteDatabase;
-        import android.database.sqlite.SQLiteOpenHelper;
-        import android.util.Log;
-
-        import fh_kiel.bleaccessory.Beacon.RoomBeacon;
+import java.util.LinkedList;
+import java.util.List;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import fh_kiel.bleaccessory.Beacon.RoomBeacon;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 
